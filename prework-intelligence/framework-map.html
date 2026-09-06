@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prework Intelligence V1 Framework Map</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --paper: #ffffff;
+      --ink: #12213a;
+      --muted: #5d6b82;
+      --line: #d8e0eb;
+      --soft: #edf2f8;
+      --green: #25764a;
+      --blue: #1d4f91;
+      --amber: #b9770e;
+      --red: #a63a42;
+      --shadow: 0 18px 44px rgba(31, 50, 75, 0.08);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    .page {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 28px 28px 44px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 20px;
+    }
+
+    .brand {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .mark {
+      width: 62px;
+      height: 62px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--blue);
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 24px;
+      border-radius: 16px 16px 20px 20px;
+      background: linear-gradient(180deg, #ffffff, #eef5ff);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 58px);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      max-width: 840px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .status-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .status-title {
+      margin: 0 0 14px;
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .status-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      padding: 10px 0;
+      border-top: 1px solid var(--soft);
+    }
+
+    .status-row:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .value {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blue);
+      background: #f4f8ff;
+      white-space: nowrap;
+    }
+
+    .tag.stop {
+      color: var(--amber);
+      background: #fff8ea;
+      border-color: #edd7ac;
+    }
+
+    .section {
+      margin-top: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .workflow {
+      padding: 24px;
+      overflow-x: auto;
+    }
+
+    .flow-grid {
+      min-width: 1040px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      position: relative;
+    }
+
+    .step {
+      min-height: 172px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: linear-gradient(180deg, #ffffff, #fbfdff);
+      position: relative;
+    }
+
+    .step::after {
+      content: "";
+      position: absolute;
+      top: 44px;
+      right: -13px;
+      width: 13px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    .step:last-child::after {
+      display: none;
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .judge .step-number,
+    .report .step-number {
+      background: var(--amber);
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .step .output {
+      margin-top: 14px;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .judge .output,
+    .report .output {
+      color: var(--amber);
+    }
+
+    .handoff {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border: 1px dashed #97b79d;
+      color: #1d5732;
+      background: #f5fbf6;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+    }
+
+    .rail {
+      padding: 22px;
+      border-right: 1px solid var(--line);
+      background: #fbfcff;
+    }
+
+    .rail h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      color: var(--blue);
+    }
+
+    .rail p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .legend {
+      display: grid;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      background: var(--green);
+    }
+
+    .dot.blue { background: var(--blue); }
+    .dot.amber { background: var(--amber); }
+    .dot.red { background: var(--red); }
+
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      padding: 22px;
+    }
+
+    .group {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .group-head {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfdff;
+    }
+
+    .group-head h3 {
+      margin: 0;
+      font-size: 15px;
+      color: var(--blue);
+    }
+
+    .group-head p {
+      margin: 6px 0 0;
+      min-height: 42px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .files {
+      display: grid;
+    }
+
+    .file {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 48px;
+      padding: 11px 14px;
+      border-top: 1px solid var(--soft);
+    }
+
+    .file:first-child {
+      border-top: 0;
+    }
+
+    .file-name {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .file-desc {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .file-type {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .file-type.method { color: var(--blue); background: #f4f8ff; }
+    .file-type.template { color: var(--green); background: #f5fbf6; }
+    .file-type.strategy { color: var(--amber); background: #fff8ea; }
+    .file-type.case { color: var(--red); background: #fff4f5; }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 22px;
+    }
+
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .decision h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .decision p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      margin: 22px 0 0;
+      padding: 18px 4px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .map-layout,
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .doc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        padding: 16px;
+      }
+
+      .brand {
+        flex-direction: column;
+      }
+
+      .status-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .doc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .file {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="brand">
+        <div class="mark">PI</div>
+        <div>
+          <h1>Prework Intelligence V1</h1>
+          <p class="subtitle">把一个想法变成可审查的证据包，再由独立判断模块给出下一步方向。这个页面用于看清每个文件的位置、作用和关系。</p>
+        </div>
+      </div>
+      <aside class="status-panel">
+        <p class="status-title">当前项目状态</p>
+        <div class="status-grid">
+          <div class="status-row">
+            <div class="label">已完成</div>
+            <div class="value">V1.1 lightweight revision and 15-case calibration run</div>
+          </div>
+          <div class="status-row">
+            <div class="label">下一步</div>
+            <div class="value">Review the 15-case run, then decide whether to revise V1.1 into V1.2</div>
+          </div>
+          <div class="status-row">
+            <div class="label">状态</div>
+            <div class="value"><span class="tag stop">Case review before V1.2</span></div>
+          </div>
+          <div class="status-row">
+            <div class="label">核心规则</div>
+            <div class="value">Search and Judgment are separate.</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Workflow</h2>
+          <p class="section-note">主流程只有一个严格交接点：Evidence Pack。</p>
+        </div>
+        <span class="tag">Search -> Evidence Pack -> Judgment</span>
+      </div>
+      <div class="workflow">
+        <div class="flow-grid">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Idea Card</h3>
+            <p>记录原始想法、用户场景、输入输出、约束和不可接受替代。</p>
+            <div class="output">Output: idea-card.md</div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Search Plan</h3>
+            <p>规划 source class、query matrix、排除规则和停止规则。</p>
+            <div class="output">Output: search-plan.md</div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Search Module</h3>
+            <p>执行搜索并聚合实体。只记录证据、分数、缺口和负面搜索范围。</p>
+            <div class="output">Output: evidence-pack.md</div>
+          </div>
+          <div class="step judge">
+            <div class="step-number">4</div>
+            <h3>Judgment Module</h3>
+            <p>只读取 Evidence Pack。不能搜索、不能新增实体、不能补证据。</p>
+            <div class="output">Input only: evidence-pack.md</div>
+          </div>
+          <div class="step report">
+            <div class="step-number">5</div>
+            <h3>Judgment Report</h3>
+            <p>每个结论必须引用 entity_id 或 negative_evidence_id。</p>
+            <div class="output">Output: judgment-report.md</div>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <h3>Retrospective</h3>
+            <p>复盘字段、搜索源、评分稳定性和结论是否能指导行动。</p>
+            <div class="output">Output: case-retrospective.md</div>
+          </div>
+        </div>
+        <div class="handoff">Evidence Pack 是 Search 和 Judgment 之间唯一交接物。Search Plan 不是 Judgment 证据。</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">文档地图</h2>
+          <p class="section-note">按功能分组查看文件。点击文件名可打开对应 Markdown。</p>
+        </div>
+        <span class="tag">98 docs + 15 cases + 1 HTML map</span>
+      </div>
+      <div class="map-layout">
+        <aside class="rail">
+          <h3>怎么读这张图</h3>
+          <p>先看 Core Method，再看 Templates，然后看 Strategy Cards，最后用 Case Runs 检查流程是否真的跑通。</p>
+          <div class="legend">
+            <div class="legend-item"><span class="dot blue"></span>方法和边界</div>
+            <div class="legend-item"><span class="dot green"></span>可复用模板</div>
+            <div class="legend-item"><span class="dot amber"></span>搜索策略</div>
+            <div class="legend-item"><span class="dot red"></span>真实案例</div>
+          </div>
+        </aside>
+        <div class="doc-grid">
+          <article class="group">
+            <div class="group-head">
+              <h3>Core Method</h3>
+              <p>定义 V1 的边界、角色、评分、来源选择和阶段状态。</p>
+            </div>
+            <div class="files">
+              <a class="file" href="docs-viewer.html?file=method.md"><span><span class="file-name">method.md</span><span class="file-desc">总体流程和模块边界</span></span><span class="file-type method">method</span></a>
+              <a class="file" href="docs-viewer.html?file=search-module.md"><span><span class="file-name">search-module.md</span><span class="file-desc">Search 只能产 Evidence Pack</span></span><span class="file-type method">method</span></a>
+              <a class="file" href="docs-viewer.html?file=judgment-module.md"><span><span class="file-name">judgment-module.md</span><span class="file-desc">Judgment 只能读 Evidence Pack</span></span><span class="file-type method">method</span></a>
+              <a class="file" href="docs-viewer.html?file=scoring-rules.md"><span><span class="file-name">scoring-rules.md</span><span class="file-desc">relevance, reuse, method, source, status</span></span><span class="file-type method">method</span></a>
+              <a class="file" href="docs-viewer.html?file=source-selection.md"><span><span class="file-name">source-selection.md</span><span class="file-desc">不同问题类型的来源覆盖要求</span></span><span class="file-type method">method</span></a>
+            </div>
+          </article>
+
+          <article class="group">
+            <div class="group-head">
+              <h3>Templates</h3>
+              <p>跑案例时复制使用的基础格式。</p>
+            </div>
+            <div class="files">
+              <a class="file" href="docs-viewer.html?file=templates/idea-card.md"><span><span class="file-name">idea-card.md</span><span class="file-desc">原始想法和约束</span></span><span class="file-type template">template</span></a>
+              <a class="file" href="docs-viewer.html?file=templates/search-plan.md"><span><span class="file-name">search-plan.md</span><span class="file-desc">搜索计划，不是判断证据</span></span><span class="file-type template">template</span></a>
+              <a class="file" href="docs-viewer.html?file=templates/evidence-pack.md"><span><span class="file-name">evidence-pack.md</span><span class="file-desc">Search 到 Judgment 的唯一交接物</span></span><span class="file-type template">template</span></a>
+              <a class="file" href="docs-viewer.html?file=templates/judgment-report.md"><span><span class="file-name">judgment-report.md</span><span class="file-desc">判断结论和证据引用</span></span><span class="file-type template">template</span></a>
+            </div>
+          </article>
+
+          <article class="group">
+            <div class="group-head">
+              <h3>Strategy Cards</h3>
+              <p>指导 Search Module 如何查某类来源。</p>
+            </div>
+            <div class="files">
+              <a class="file" href="docs-viewer.html?file=strategy-cards/README.md"><span><span class="file-name">README.md</span><span class="file-desc">策略卡规则和目录</span></span><span class="file-type strategy">index</span></a>
+              <a class="file" href="docs-viewer.html?file=strategy-cards/github-implementation-search.md"><span><span class="file-name">github-implementation-search.md</span><span class="file-desc">开源实现和代码基础</span></span><span class="file-type strategy">search</span></a>
+              <a class="file" href="docs-viewer.html?file=strategy-cards/negative-evidence-search.md"><span><span class="file-name">negative-evidence-search.md</span><span class="file-desc">记录已覆盖范围内未发现强证据</span></span><span class="file-type strategy">search</span></a>
+              <a class="file" href="docs-viewer.html?file=strategy-cards/product-competitor-search.md"><span><span class="file-name">product-competitor-search.md</span><span class="file-desc">产品和竞品替代方案</span></span><span class="file-type strategy">search</span></a>
+              <a class="file" href="docs-viewer.html?file=strategy-cards/paper-prior-work-search.md"><span><span class="file-name">paper-prior-work-search.md</span><span class="file-desc">论文、方法、benchmark、dataset</span></span><span class="file-type strategy">search</span></a>
+              <a class="file" href="docs-viewer.html?file=strategy-cards/strategy-cards-review.md"><span><span class="file-name">strategy-cards-review.md</span><span class="file-desc">策略卡一致性审查记录</span></span><span class="file-type strategy">review</span></a>
+            </div>
+          </article>
+
+          <article class="group">
+            <div class="group-head">
+              <h3>Controls</h3>
+              <p>控制无人值守推进、验证和下一阶段。</p>
+            </div>
+            <div class="files">
+              <a class="file" href="docs-viewer.html?file=ROADMAP.md"><span><span class="file-name">ROADMAP.md</span><span class="file-desc">阶段表和 hard stop</span></span><span class="file-type method">control</span></a>
+              <a class="file" href="docs-viewer.html?file=AUTORUN.md"><span><span class="file-name">AUTORUN.md</span><span class="file-desc">无人值守推进规则</span></span><span class="file-type method">control</span></a>
+              <a class="file" href="docs-viewer.html?file=CHECKLIST.md"><span><span class="file-name">CHECKLIST.md</span><span class="file-desc">每阶段验证清单</span></span><span class="file-type method">control</span></a>
+              <a class="file" href="docs-viewer.html?file=NEXT_ACTION.md"><span><span class="file-name">NEXT_ACTION.md</span><span class="file-desc">当前下一步和停止规则</span></span><span class="file-type method">control</span></a>
+              <a class="file" href="docs-viewer.html?file=current-state.md"><span><span class="file-name">current-state.md</span><span class="file-desc">当前项目状态快照</span></span><span class="file-type method">state</span></a>
+              <a class="file" href="docs-viewer.html?file=language-guide.md"><span><span class="file-name">language-guide.md</span><span class="file-desc">中文优先和英文保留规则</span></span><span class="file-type method">language</span></a>
+            </div>
+          </article>
+
+          <article class="group">
+            <div class="group-head">
+              <h3>Case Runs</h3>
+              <p>15 个校准案例，用来暴露流程缺陷并校准 V1.1 字段；重点审查案例优先提供中文阅读版。</p>
+            </div>
+            <div class="files">
+              <a class="file" href="docs-viewer.html?file=cases/case-run-summary.md"><span><span class="file-name">case-run-summary.md</span><span class="file-desc">15 个案例的总览、结论和复盘重点</span></span><span class="file-type case">summary</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/codex-sidebar-title-management/judgment-report-v1.1.md"><span><span class="file-name">A1 Codex title management</span><span class="file-desc">回归测试 claim/surface/freshness</span></span><span class="file-type case">A1</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/open-source-patcher-formal-solution/judgment-report.md"><span><span class="file-name">A2 open-source patcher</span><span class="file-desc">区分相关实现和可安全复用</span></span><span class="file-type case">A2</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/fast-changing-product-capability/judgment-report.zh.md"><span><span class="file-name">A3 fast-changing capability</span><span class="file-desc">验证 freshness gate，中文阅读版</span></span><span class="file-type case">A3</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/desktop-ai-floating-assistant/judgment-report.zh.md"><span><span class="file-name">B1 desktop AI assistant</span><span class="file-desc">产品/工具替代方案边界，中文阅读版</span></span><span class="file-type case">B1</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/agent-instructions-best-practices/judgment-report.md"><span><span class="file-name">B2 agent instructions</span><span class="file-desc">官方文档、社区模板和真实仓库</span></span><span class="file-type case">B2</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/obsidian-agent-knowledge-workflow/judgment-report.md"><span><span class="file-name">B3 Obsidian agent workflow</span><span class="file-desc">笔记、记忆和 agent context 区分</span></span><span class="file-type case">B3</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/free-large-file-translation-tools/judgment-report.md"><span><span class="file-name">B4 large-file translation</span><span class="file-desc">免费、限制、隐私和本地方案</span></span><span class="file-type case">B4</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/pinn-ilw-prior-work/judgment-report.zh.md"><span><span class="file-name">C1 PINN + ILW prior work</span><span class="file-desc">术语歧义和论文 prior work，中文阅读版</span></span><span class="file-type case">C1</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/xnet-fftxnet-pde-ilw/judgment-report.md"><span><span class="file-name">C2 XNet / FFT-XNet PDE</span><span class="file-desc">跨方法迁移和负面证据</span></span><span class="file-type case">C2</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/medical-transformer-ecmo-risk-reuse/judgment-report.md"><span><span class="file-name">C3 medical Transformer reuse</span><span class="file-desc">医学论文复用和数据适配</span></span><span class="file-type case">C3</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/pdf-vllm-icu-nursing-extraction/judgment-report.zh.md"><span><span class="file-name">D1 PDF-VLLM ICU extraction</span><span class="file-desc">临床抽取、隐私和人工复核，中文阅读版</span></span><span class="file-type case">D1</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/ecmo-unstructured-extraction-prediction/judgment-report.zh.md"><span><span class="file-name">D2 ECMO extraction prediction</span><span class="file-desc">抽取、时间线和预测分离，中文阅读版</span></span><span class="file-type case">D2</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/fluent-blood-flow-automation/judgment-report.md"><span><span class="file-name">D3 Fluent blood-flow automation</span><span class="file-desc">工程软件脚本化和验证层</span></span><span class="file-type case">D3</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/existing-skill-agent-framework-comparison/judgment-report.md"><span><span class="file-name">E1 skill / agent framework</span><span class="file-desc">和现有框架做结构对标</span></span><span class="file-type case">E1</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/existing-work-search-method-prior-work/judgment-report.md"><span><span class="file-name">E2 prior-work method search</span><span class="file-desc">对标 prior art 和 build-vs-buy 方法</span></span><span class="file-type case">E2</span></a>
+            </div>
+          </article>
+
+          <article class="group">
+            <div class="group-head">
+              <h3>建议阅读顺序</h3>
+              <p>如果只想快速理解，按这个顺序读；已生成中文阅读版的案例默认打开中文报告。</p>
+            </div>
+            <div class="files">
+              <a class="file" href="docs-viewer.html?file=current-state.md"><span><span class="file-name">1. current-state.md</span><span class="file-desc">先看现在到了哪一步</span></span><span class="file-type method">start</span></a>
+              <a class="file" href="docs-viewer.html?file=method.md"><span><span class="file-name">2. method.md</span><span class="file-desc">理解主流程和边界</span></span><span class="file-type method">core</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/case-run-summary.md"><span><span class="file-name">3. case-run-summary.md</span><span class="file-desc">看 15 个案例的总览和优先审查项</span></span><span class="file-type case">summary</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/pinn-ilw-prior-work/judgment-report.zh.md"><span><span class="file-name">4. C1 PINN + ILW</span><span class="file-desc">先看最需要确认术语的案例，中文阅读版</span></span><span class="file-type case">C1</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/fast-changing-product-capability/judgment-report.zh.md"><span><span class="file-name">5. A3 fast-changing product</span><span class="file-desc">检查 freshness gate 是否合理，中文阅读版</span></span><span class="file-type case">A3</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/pdf-vllm-icu-nursing-extraction/judgment-report.zh.md"><span><span class="file-name">6. D1 PDF-VLLM ICU</span><span class="file-desc">检查隐私敏感垂直流程，中文阅读版</span></span><span class="file-type case">D1</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/ecmo-unstructured-extraction-prediction/judgment-report.zh.md"><span><span class="file-name">7. D2 ECMO extraction</span><span class="file-desc">检查抽取和预测是否分开，中文阅读版</span></span><span class="file-type case">D2</span></a>
+              <a class="file" href="docs-viewer.html?file=cases/desktop-ai-floating-assistant/judgment-report.zh.md"><span><span class="file-name">8. B1 desktop AI assistant</span><span class="file-desc">看下一步真实产品探索候选，中文阅读版</span></span><span class="file-type case">B1</span></a>
+              <a class="file" href="docs-viewer.html?file=NEXT_ACTION.md"><span><span class="file-name">9. NEXT_ACTION.md</span><span class="file-desc">确认审查后的下一步</span></span><span class="file-type method">next</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">判断结论词汇</h2>
+          <p class="section-note">Judgment Report 只能从这些结论中选一个，并且必须引用 Evidence Pack 中的记录。</p>
+        </div>
+      </div>
+      <div class="decision-grid">
+        <div class="decision"><h3>放弃不做</h3><p>已有证据表明现在不值得继续。</p></div>
+        <div class="decision"><h3>直接采用</h3><p>已有方案足够贴合，可以直接使用。</p></div>
+        <div class="decision"><h3>接入改造</h3><p>已有方案覆盖基础需求，需要集成、包装或轻改。</p></div>
+        <div class="decision"><h3>场景定制</h3><p>通用方案存在，但用户场景需要垂直化。</p></div>
+        <div class="decision"><h3>补齐缺口</h3><p>已有基础，主要价值是补工作流、体验或最后一公里。A1 回归测试展示了这类判断。</p></div>
+        <div class="decision"><h3>自研小样</h3><p>没有合适可复用基础，适合先做小型自研原型。</p></div>
+        <div class="decision"><h3>先补证据</h3><p>证据包不足，不应强行判断。</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">语言分层</h2>
+          <p class="section-note">为了让中文读者更容易阅读，同时保持字段和接口稳定，文档按用途决定语言。</p>
+        </div>
+        <a class="tag" href="docs-viewer.html?file=language-guide.md">查看 language-guide.md</a>
+      </div>
+      <div class="decision-grid">
+        <div class="decision"><h3>中文优先</h3><p>状态、路线图、停止规则、案例复盘、判断理由和展示页。它们主要给人读。</p></div>
+        <div class="decision"><h3>中英混合</h3><p>模板、Evidence Pack 和 Strategy Cards。说明用中文，字段名和 query templates 保持英文。</p></div>
+        <div class="decision"><h3>英文保留</h3><p>文件名、字段名、枚举值、URL、repo 名、issue 标题和外部来源标题。</p></div>
+        <div class="decision"><h3>后续顺序</h3><p>先中文化方法说明，再处理策略卡说明，最后逐步整理案例叙述。</p></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <span>Prework Intelligence V1 Framework Map</span>
+      <span>Static HTML. No external dependencies. Open this file directly in a browser.</span>
+    </div>
+  </main>
+</body>
+</html>
