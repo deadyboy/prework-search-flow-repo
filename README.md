@@ -1,41 +1,40 @@
-# Prework Search Process
+# 搜索流程设计（Prework Intelligence）
 
-This repository contains a standalone documentation snapshot of our **prework intelligence / search-flow design** project.
+本仓库是我们“Vibe Coding 启动前质检”框架的独立文档仓库，核心目标是做**是否值得启动该任务**的前置判断。
 
-## What this project is doing
+## 我们在做什么
 
-This project is a pre-work quality gate for agent tasks, especially for Vibe Coding style work:
+在一个新请求到来时，先做搜索价值和再用价值判断：
 
-- Decide whether a new request is worth starting from scratch.
-- Search whether similar work already exists (methods, tools, products, frameworks, cases).
-- Estimate effort and reuseability before implementation.
-- Track evidence, assumptions, and confidence in a structured way.
+- 先判断这个问题是否**值得大量投入搜索**；
+- 判断是否已有可复用成果（框架、方案、源码、论文、竞品案例）；
+- 输出可复用度与剩余工作差距；
+- 形成明确的启动决策（直接开始、复用优先、改造优先、需要补证据再决策）。
 
-## Core idea
+## 设计核心
 
-The project does **pre-start assessment first**:
+1. 任务意图分解：把问题拆成可验证子问题。
+2. 搜索策略分层：按问题难度和价值生成检索策略。
+3. 来源路由：官方文档、开源仓库、论文、竞品产品、案例回顾。
+4. 证据打包：每个判断都挂实体级证据，不靠“看起来像对”拍脑袋。
+5. 评分与决策：给出结构化复用度、风险与可信度输出，不只给一个模糊结论。
 
-1. Parse request intent and expected outcome.
-2. Judge whether search/reuse is valuable.
-3. Execute a scoped search process (search plans + source routing).
-4. Generate evidence pack + judgment report.
-5. Output a clear start recommendation (direct do / adopt existing / adapt / defer).
+## 本仓库内容
 
-## What is included
+- `docs/prework-intelligence/`：方法论、评分规则、搜索/判断模块、策略卡。
+- `docs/prework-intelligence/cases/`：多案例复盘、独立评审、搜索计划与判定样例。
+- `docs/prework-intelligence/current-state.md`：项目当前状态。
 
-- `docs/prework-intelligence/` : methods, rules, case templates, scoring rules, strategy cards, and worked retrospectives.
-- Case folders under `docs/prework-intelligence/cases/` showing trial records and judgment outputs.
-- Retrospective and evaluation materials from the 15-case loop.
+## 边界说明
 
-## Scope and boundaries
+- 这是**以方法和资产复用为主**的仓库。
+- 不包含最终产品平台代码，不承诺自动替代开发过程。
+- 强调证据与可复现判断流程。
 
-This repo is intentionally documentation-first.
+## 使用场景
 
-- No runtime platform implementation.
-- No desktop/web UI product packaging.
-- Focus on searchable decision framework and reusable process artifacts.
+适合在正式实现前用于评估：
 
-## Notes
-
-- Language: Chinese-first docs.
-- This snapshot was built from the local development workspace and shared for review/sync.
+- 任务重复性高、可复用度高的场景；
+- 复杂度高、外部资料更新快、错误风险高的场景；
+- 需要先判断“是否该继续往下做”的场景。
